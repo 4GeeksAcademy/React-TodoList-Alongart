@@ -4,42 +4,29 @@ import ToDoContainer from "./ToDoContainer";
 export default function Todo({ todoList, setTodoList }) {
     
     const [showDelete, setShowDelete] = useState(false);
-    
-    const removeToDo = () => {
-        setTodoList([]);
-      };
-    
-      const handleMouseEnter = (index) => {
-        setShowDelete(index);
-      };
-    
-      const handleMouseLeave = () => {
-        setShowDelete(false);
-      };
-    
-      const todos = [];
-      for (let i = 0; i < todoList.length; i++) {
-        todos.push(
-          <div
-            key={i}
-            onMouseEnter={() => handleMouseEnter(i)}
-            onMouseLeave={handleMouseLeave}
-          >
-            <p>{todoList[i]}</p>
+
+    const removeToDo = (index) => {
+      const newTodoList = [...todoList];
+      newTodoList.splice(index, 1);
+      setTodoList(newTodoList);
+    };
+
+    return (
+      <div
+        onMouseEnter={() => setShowDelete(true)}
+        onMouseLeave={() => setShowDelete(false)}
+      >
+        {todoList.map((todo, index) => (
+          <div className="todosList" key={index}>
+            <p>{todo}</p>
             {showDelete && (
-              <button onClick={removeToDo}>Delete</button>
+              <button onClick={removeToDo}>x</button>
             )}
           </div>
-        );
-      }
-    
-      return (
-        <div>
-          {todos}
-        </div>
-      );
-    }
-
+        ))}
+      </div>
+    );
+}
 
 // {/* <div 
 // // onMouseEnter={() => setShowDelete(true)}

@@ -22,3 +22,14 @@ body {
     padding: 15px;
 }
 
+.todosList {
+    display:flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+button {
+    background: transparent;
+    border: none !important;
+
+}
